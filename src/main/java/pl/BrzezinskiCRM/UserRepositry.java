@@ -1,4 +1,4 @@
-package pl.jaknauczycsieprogramowania;
+package pl.BrzezinskiCRM;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

@@ -1,4 +1,4 @@
-package pl.jaknauczycsieprogramowania;
+package pl.BrzezinskiCRM;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -19,8 +19,8 @@ public class WorkService {
 
     Work savedWork;
 
-    @PostMapping("/work")
-    public ResponseEntity addWork(@RequestHeader("user_id") Long user_id) {
+    @PostMapping("/startWork")
+    public ResponseEntity startWork(@RequestHeader("user_id") Long user_id) {
 
         Optional<User> userFromDb = userRepositry.findById(user_id);
 
@@ -32,6 +32,17 @@ public class WorkService {
         savedWork = workRepository.save(work);
 
         return ResponseEntity.ok(savedWork);
+    }
+
+    @Transactional
+    @PutMapping("/endWork")
+    public ResponseEntity endWork(@RequestHeader("work_status") boolean work_status){
+
+        Work workFromDb = workRepository.findById(savedWork.getId());
+
+        workFromDb.setWork_status(work_status);
+
+        return ResponseEntity.ok(workFromDb);
     }
 
     @Transactional
