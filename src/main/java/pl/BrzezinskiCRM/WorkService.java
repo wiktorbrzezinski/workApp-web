@@ -6,6 +6,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.transaction.Transactional;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Optional;
 
 @RestController
@@ -20,7 +22,9 @@ public class WorkService {
     Work savedWork;
 
     @PostMapping("/startWork")
-    public ResponseEntity startWork(@RequestHeader("user_id") Long user_id) {
+    public ResponseEntity startWork(@RequestHeader("user_id") Long user_id, @RequestBody String location) {
+
+       Date date = new Date();
 
         Optional<User> userFromDb = userRepositry.findById(user_id);
 
@@ -28,7 +32,7 @@ public class WorkService {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
         }
 
-        Work work = new Work(userFromDb.get(), true, 0, "0");
+        Work work = new Work(userFromDb.get(), true, 0, location, date);
         savedWork = workRepository.save(work);
 
         return ResponseEntity.ok(savedWork);

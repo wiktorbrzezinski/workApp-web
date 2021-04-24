@@ -3,6 +3,8 @@ package pl.BrzezinskiCRM;
 import lombok.*;
 
 import javax.persistence.*;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 @NoArgsConstructor
 @RequiredArgsConstructor
@@ -30,5 +32,8 @@ public class Work {
 
     @NonNull
     private String location;
+
+    @NonNull
+    private Date date;
 
 }
