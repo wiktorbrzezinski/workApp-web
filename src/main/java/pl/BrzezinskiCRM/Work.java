@@ -34,6 +34,6 @@ public class Work {
     private String location;
 
     @NonNull
-    private Date date;
+    private String date;
 
 }
